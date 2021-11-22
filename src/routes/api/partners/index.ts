@@ -7,9 +7,11 @@ let router = Router();
 
 router.get('/',(req: Request, res: Response)=>{
     // const partners: Partner[] = jsonPartners as Partner[];
-    var searchTerm: string = req.query.q ? req.query.q.toString() : "";
+    var term: string = req.query.term ? req.query.term.toString() : "";
+    var range: number = req.query.range ? parseFloat(req.query.range.toString()) : 0;
+
     var partnerController = new PartnerController();
-    var partners = partnerController.search(searchTerm);
+    var partners = partnerController.search(term, range);
 
     res.status(200).send(partners);
 });
